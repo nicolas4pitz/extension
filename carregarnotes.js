@@ -8,7 +8,8 @@ async function carregarNotas() {
   const res = await chrome.storage.local.get("quidnotes");
   const mystorage = res.quidnotes || [];
 
-  const container = document.getElementById("container")
+  const container = document.createElement("div")
+  document.body.appendChild(container)
   container.innerHTML = ''
   
   mystorage.forEach(nota => {
