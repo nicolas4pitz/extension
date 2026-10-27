@@ -14,7 +14,7 @@
     <label for="title"></label>
     <input type="text" name="title" id="title-form">
     <label for="description"></label>
-    <input type="text" name="description id="description-form">
+    <input type="text" name="description" id="description-form">
     <input type="submit" value="submit">
   </form>
 
@@ -34,15 +34,15 @@
         id: Date.now()
       }
 
-      localStorage.getItem(["quidnotes"], (res) => {
-        const mystorage = res.quidnotes || [];
+      const res = localStorage.getItem("quidnotes");
+      const mystorage = res ? JSON.parse(res) : [];
 
-        mystorage.push(noteObj)
+      mystorage.push(noteObj)
 
-        localStorage.setItem({ quidnotes: mystorage}, () => {
-          alert("Dados salvos")
-        })
-      })
+      localStorage.setItem("quidnotes", JSON.stringify(mystorage));
+      
+      alert("Dados salvos");
+
     })
   </script>
 </body>
