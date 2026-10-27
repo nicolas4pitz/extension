@@ -9,22 +9,24 @@
 
   <a href="index.html">Home</a>
   
-  <div id="container" class="container">
-
-  </div>
+  <div id="container" class="container"></div>
 
   <script>
-    const res = localStorage.getItem("quidnotes");
-    const mystorage = res ? JSON.parse(res) : [];
+    async function carregarNotas() {
+      const res = await chrome.storage.local.get("quidnotes");
+      const mystorage = res.quidnotes || [];
 
-    const container = document.getElementById("container")
-    container.innerHTML = ''
+      const container = document.getElementById("container")
+      container.innerHTML = ''
+      
+      mystorage.forEach(nota => {
+        const elementoDiv = document.createElement("div")
+        elementoDiv.innerHTML = `<h3>${nota.title}</h3><p>${nota.description}</p>`
+        container.appendChild(elementoDiv)
+      });
+    }
 
-    mystorage.forEach(nota => {
-      const elementoDiv = document.createElement("div")
-      elementoDiv.innerHTML = `<h3>${nota.title}</h3><p>${nota.description}</p>`
-      container.appendChild(elementoDiv)
-    });
+    carregarNotas();
   </script>
 </body>
 </html>
