@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <a href="/index.html">Home</a>
+  
+  <div id="container" class="container">
+
+  </div>
+
+  <script>
+    localStorage.getItem(["quidnotes"], (res) => {
+      const mystorage = res.quidnotes || [];
+
+      const container = document.getElementById("container")
+      container.innerHTML = ''
+
+      mystorage.array.forEach(element => {
+        const element = document.createElement("div")
+        element.innerHTML = `<h3>${element.title}</h3><p>${element.description}</p>`
+        container.appendChild(element)
+      });
+    })
+  </script>
+</body>
+</html>

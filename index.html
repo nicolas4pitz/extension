@@ -3,9 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>QuidNotes</title>
 </head>
 <body>
   Hello World
+
+  <a href="/list.html">List</a>
+
+  <form id="formulario">
+    <label for="title"></label>
+    <input type="text" name="title" id="title-form">
+    <label for="description"></label>
+    <input type="text" name="description id="description-form">
+    <input type="submit" value="submit">
+  </form>
+
+  <script>
+    const formulario = document.getElementById("formulario")
+    formulario.addEventListener("submit", (event) => {
+      event.preventDefault()
+
+      const formsData = new FormData(formulario)
+
+      const title = formsData.get("title")
+      const description= formsData.get("description")
+
+      const noteObj = {
+        title: title,
+        description: description,
+        id: Date.now()
+      }
+
+      localStorage.getItem(["quidnotes"], (res) => {
+        const mystorage = res.quidnotes || [];
+
+        mystorage.push(noteObj)
+
+        localStorage.setItem({ quidnotes: mystorage}, () => {
+          alert("Dados salvos")
+        })
+      })
+    })
+  </script>
 </body>
 </html>
